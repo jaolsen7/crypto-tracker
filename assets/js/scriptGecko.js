@@ -1,4 +1,4 @@
-var requestUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=bitcoin&api-key=pwSjTOg5rhnaPpEuYF8qONwQlPcvBJbR";
+var requestUrl = "https://api.coingecko.com/api/v3/simple/price?ids=" + search + "&vs_currencies=USD&include_last_updated_at=true";
 
 fetch(requestUrl)
         .then(function (response) {
