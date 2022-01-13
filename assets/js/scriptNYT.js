@@ -5,7 +5,7 @@ fetch(requestUrl)
             return response.json();
         })
         .then(function (data) {
-                console.log(data)
+                //console.log(data)
                 console.log(data.response.docs[0].headline.main)
                 console.log(data.response.docs[0].web_url)
         });
