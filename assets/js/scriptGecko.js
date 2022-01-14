@@ -29,6 +29,8 @@ function getGecko(searchInput) {
       var price = data[searchInput].usd;
       var unix = data[searchInput].last_updated_at;
 
+      console.log(searchInput);
+
       var date = new Date(unix * 1000);
       var dateObject = "Date: " + date.toLocaleString().split(",")[0];
       var dateLi = document.createElement("li");
