@@ -66,6 +66,7 @@ function getGecko(searchInput) {
 
       var unix = data[searchInput].last_updated_at;
       var date = new Date(unix * 1000);
+
       var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
 
       var footerEl = document.createElement("footer");
@@ -79,6 +80,7 @@ function getGecko(searchInput) {
       cardEl.append(footerEl);
 
       geckoEl.append(cardEl);
+
     });
 }
 
