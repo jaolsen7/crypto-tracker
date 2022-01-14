@@ -4,7 +4,8 @@
 // Starts function on click of submit button
 $("#search").click(function (event) {
   var select = document.getElementById("search-bar");
-  var value = select.options[select.selectedIndex].textContent;
+  var value = select.value;
+  //var value = select.options[select.selectedIndex].textContent;
   var searchInput = value;
   //console.log($("input").val());
   event.preventDefault();
@@ -26,20 +27,58 @@ function getGecko(searchInput) {
       return response.json();
     })
     .then(function (data) {
+      var cardEl = document.createElement("div");
+      cardEl.classList.add(
+        "w3-col",
+        "m6",
+        "l6",
+        "w3-card-2",
+        "w3-margin-top",
+        "w3-margin-bottom"
+      );
+
+      var headerEl = document.createElement("header");
+      headerEl.classList.add("w3-container", "w3-blue");
+      var titleEl = document.createElement("h3");
+      titleEl.textContent = searchInput;
+      var starBtn = document.createElement("button");
+      starBtn.textContent = "☆";
+      starBtn.classList.add(
+        "w3-button",
+        "w3-circle",
+        "w3-teal",
+        "w3-right",
+        "w3-margin-bottom"
+      );
+      titleEl.append(starBtn);
+      headerEl.append(titleEl);
+      cardEl.append(headerEl);
+
+      var newsEl = document.createElement("div");
+      newsEl.classList.add("w3-container");
+      var articleEl = document.createElement("p");
+      articleEl.textContent = "how do i get tyler's stuff from fetch?";
+      //var linkEl = document.createElement("a");
+      newsEl.append(articleEl);
+      cardEl.append(newsEl);
+
       var price = data[searchInput].usd;
+
       var unix = data[searchInput].last_updated_at;
-
       var date = new Date(unix * 1000);
-      var dateObject = "Date: " + date.toLocaleString().split(",")[0];
-      var dateLi = document.createElement("li");
-      dateLi.append(dateObject);
-      geckoEl.append(dateLi);
+      var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
 
-      var priceLi = document.createElement("li");
-      var priceObject = "Price: " + price + " USD";
-      priceLi.append(priceObject);
-      //priceLi.setAttribute("class", "list-group-item");
-      geckoEl.append(priceLi);
+      var footerEl = document.createElement("footer");
+      footerEl.classList.add("w3-container", "w3-blue");
+      var priceEl = document.createElement("h5");
+      priceEl.textContent = "Price: " + price + " USD";
+      var dateEl = document.createElement("h6");
+      dateEl.textContent = dateObject;
+      footerEl.append(priceEl);
+      footerEl.append(dateEl);
+      cardEl.append(footerEl);
+
+      geckoEl.append(cardEl);
     });
 }
 
