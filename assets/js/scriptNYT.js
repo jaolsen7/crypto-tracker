@@ -36,7 +36,7 @@ function getNYT(search) {
 
 
       var star = document.createElement("button");
-      star.classList.add("w3-button");
+      star.classList.add("w3-button", "favorite-button");
       star.textContent="Favorite";
       resultBody.append(star);
       
@@ -50,3 +50,11 @@ $("#search").click(function (event) {
   getNYT(searchInput);
  
 });
+
+
+$(".api-container").on("click", function(event) {
+        var element = event.target;
+        if (element.matches("button") === true) {
+          //local storage save function
+        }
+      });
