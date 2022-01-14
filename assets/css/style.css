@@ -1,3 +1,20 @@
-form {
+.center-search {
     display: flex;
+
+    width: 55%;
+}
+
+#search-container {
+    display: flex;
+    justify-content: center;
+}
+
+#api-container {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+img {
+    width: 45%;
 }
