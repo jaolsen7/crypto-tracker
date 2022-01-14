@@ -40,6 +40,7 @@ function getGecko(searchInput) {
       priceLi.append(priceObject);
       //priceLi.setAttribute("class", "list-group-item");
       geckoEl.append(priceLi);
+
     });
 }
 
