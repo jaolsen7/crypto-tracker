@@ -31,7 +31,9 @@ function getNYT(search) {
         });
 }
 $("#search").click(function (event) {
-                var searchInput = $("input").val();
+        var select = document.getElementById("search-bar");
+        var value = select.options[select.selectedIndex].textContent;
+        var searchInput = value;
                 event.preventDefault();
                 getNYT(searchInput);
                 });
