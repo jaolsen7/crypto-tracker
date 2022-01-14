@@ -20,7 +20,7 @@ function getNYT(search) {
                 titleEl.textContent = "News:  " + data.response.docs[0].headline.main;
               
                 var bodyContentEl = document.createElement('a');
-                bodyContentEl.textContent = "link";
+                bodyContentEl.textContent = data.response.docs[0].web_url;
                 bodyContentEl.setAttribute("href", data.response.docs[0].web_url);
                 //<link href="/media/examples/link-element-example.css" rel="stylesheet"></link>
                 // "<link href=" + data.response.docs[0].web_url +">" + '<br/>';
