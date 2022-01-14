@@ -1,3 +1,36 @@
-form {
+.center-search {
     display: flex;
+
+    width: 55%;
+}
+
+#search-container {
+    display: flex;
+    justify-content: center;
+    background-color: #02b8a5;
+}
+
+#api-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+
+h1 {
+    margin: 0;
+}
+
+img {
+    width: 45%;
+}
+
+.api-rows {
+    position: relative;
+}
+
+#position {
+    position: absolute;
+    top: 3%;
+    left: 3%;
 }
