@@ -1,6 +1,5 @@
 .center-search {
     display: flex;
-
     width: 55%;
 }
 
@@ -8,21 +7,6 @@
     display: flex;
     justify-content: center;
     background-color: #02b8a5;
-}
-
-#api-container {
-    /* display: flex;
-    justify-content: space-around; */
-    margin-top: 50px;
-}
-
-
-h1 {
-    margin: 0;
-}
-
-.api-rows {
-    position: relative;
 }
 
 #fav-star {
