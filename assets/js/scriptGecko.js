@@ -53,13 +53,13 @@ function getNYT(searchInput, cardEl) {
         linkEl.setAttribute("href", url);
     });
 }
-
 // Gecko Function that retrieves price and date last updated, creates a card with elements
 function getGecko(searchInput, cardEl) {
   var requestUrl =
     "https://api.coingecko.com/api/v3/simple/price?ids=" +
     searchInput +
     "&vs_currencies=USD&include_last_updated_at=true";
+
 
   fetch(requestUrl)
     .then(function (response) {
@@ -70,9 +70,9 @@ function getGecko(searchInput, cardEl) {
         var unix = data[searchInput].last_updated_at;
         var date = new Date(unix * 1000);
         var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
-
         cardEl.querySelector("h5").textContent = "Price: " + price + " USD";
         $("h6").text(dateObject);
+
     });
 }
 
