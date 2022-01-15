@@ -23,11 +23,10 @@ function makeCard() {
     "w3-margin-bottom"
   );
   cardEl.innerHTML =
-    "<header class='w3-container w3-blue'><h3><button class='w3-button w3-circle w3-teal w3-right w3-margin-bottom w3-right'></button></h3></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
+    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-right w3-margin-bottom w3-right'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
   apiEl.append(cardEl);
   getNYT(searchInput, cardEl);
   getGecko(searchInput, cardEl);
-  console.log(apiEl);
 }
 
 function getNYT(searchInput, cardEl) {
@@ -40,22 +39,18 @@ function getNYT(searchInput, cardEl) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data.response.docs[0].headline.main);
 
       // Sets up header
-        $("#w3-button").text("☆");
+        $(".star-btn").text("☆");
         cardEl.querySelector("h3").textContent = searchInput;
 
         // Sets up NYT info
         cardEl.querySelector("p").textContent = data.response.docs[0].headline.main;
         var url = data.response.docs[0].web_url;
-        console.log(url);
         var urlText = "Link to Article";
         var linkEl = cardEl.querySelector("a");
         linkEl.append(urlText);
         linkEl.setAttribute("href", url);
-        console.log(linkEl);
-
     });
 }
 
