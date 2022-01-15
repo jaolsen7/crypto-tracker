@@ -1,84 +1,83 @@
-// var favorites = [];
-// var
-
 // Starts function on click of submit button
+var searchInput = "";
 $("#search").click(function (event) {
   var select = document.getElementById("search-bar");
   var value = select.value;
-  //var value = select.options[select.selectedIndex].textContent;
-  var searchInput = value;
-  //console.log($("input").val());
+
+  searchInput = value;
   event.preventDefault();
 
-  getGecko(searchInput);
+  makeCard();
 });
 
-// Gecko Function that retrieves price and date last updated
-var geckoEl = document.querySelector("#api-container");
-function getGecko(searchInput) {
+var apiEl = document.querySelector("#api-container");
+
+function makeCard() {
+  var cardEl = document.createElement("div");
+  cardEl.classList.add(
+    "w3-col",
+    "m6",
+    "l6",
+    "w3-card-2",
+    "w3-margin-top",
+    "w3-margin-bottom"
+  );
+  cardEl.innerHTML =
+    "<header class='w3-container w3-blue'><h3><button class='w3-button w3-circle w3-teal w3-right w3-margin-bottom w3-right'></button></h3></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
+  apiEl.append(cardEl);
+  getNYT(searchInput, cardEl);
+  getGecko(searchInput, cardEl);
+  console.log(apiEl);
+}
+
+function getNYT(searchInput, cardEl) {
+  var requestUrl =
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+    searchInput +
+    "&api-key=pwSjTOg5rhnaPpEuYF8qONwQlPcvBJbR";
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data.response.docs[0].headline.main);
+
+      // Sets up header
+        $("#w3-button").text("☆");
+        cardEl.querySelector("h3").textContent = searchInput;
+
+        // Sets up NYT info
+        cardEl.querySelector("p").textContent = data.response.docs[0].headline.main;
+        var url = data.response.docs[0].web_url;
+        console.log(url);
+        var urlText = "Link to Article";
+        var linkEl = cardEl.querySelector("a");
+        linkEl.append(urlText);
+        linkEl.setAttribute("href", url);
+        console.log(linkEl);
+
+    });
+}
+
+// Gecko Function that retrieves price and date last updated, creates a card with elements
+function getGecko(searchInput, cardEl) {
   var requestUrl =
     "https://api.coingecko.com/api/v3/simple/price?ids=" +
     searchInput +
     "&vs_currencies=USD&include_last_updated_at=true";
-  console.log(requestUrl);
 
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      var cardEl = document.createElement("div");
-      cardEl.classList.add(
-        "w3-col",
-        "m6",
-        "l6",
-        "w3-card-2",
-        "w3-margin-top",
-        "w3-margin-bottom"
-      );
+        var price = data[searchInput].usd;
+        var unix = data[searchInput].last_updated_at;
+        var date = new Date(unix * 1000);
+        var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
 
-      var headerEl = document.createElement("header");
-      headerEl.classList.add("w3-container", "w3-blue");
-      var titleEl = document.createElement("h3");
-      titleEl.textContent = searchInput;
-      var starBtn = document.createElement("button");
-      starBtn.textContent = "☆";
-      starBtn.classList.add(
-        "w3-button",
-        "w3-circle",
-        "w3-teal",
-        "w3-right",
-        "w3-margin-bottom"
-      );
-      titleEl.append(starBtn);
-      headerEl.append(titleEl);
-      cardEl.append(headerEl);
-
-      var newsEl = document.createElement("div");
-      newsEl.classList.add("w3-container");
-      var articleEl = document.createElement("p");
-      articleEl.textContent = "how do i get tyler's stuff from fetch?";
-      //var linkEl = document.createElement("a");
-      newsEl.append(articleEl);
-      cardEl.append(newsEl);
-
-      var price = data[searchInput].usd;
-
-      var unix = data[searchInput].last_updated_at;
-      var date = new Date(unix * 1000);
-      var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
-
-      var footerEl = document.createElement("footer");
-      footerEl.classList.add("w3-container", "w3-blue");
-      var priceEl = document.createElement("h5");
-      priceEl.textContent = "Price: " + price + " USD";
-      var dateEl = document.createElement("h6");
-      dateEl.textContent = dateObject;
-      footerEl.append(priceEl);
-      footerEl.append(dateEl);
-      cardEl.append(footerEl);
-
-      geckoEl.append(cardEl);
+        cardEl.querySelector("h5").textContent = "Price: " + price + " USD";
+        $("h6").text(dateObject);
     });
 }
 
