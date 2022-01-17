@@ -8,6 +8,14 @@ $("#search").click(function (event) {
   event.preventDefault();
 
   makeCard();
+
+  var stars = $(".star-btn");
+  stars.click(function(event) {
+    if ($(this).attr("class").includes("w3-teal")) {
+      $(this).removeClass("w3-teal");
+      $(this).addClass("w3-yellow");
+    };
+  });
 });
 
 var apiEl = document.querySelector("#api-container");
@@ -23,7 +31,7 @@ function makeCard() {
     "w3-margin-bottom"
   );
   cardEl.innerHTML =
-    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-right w3-margin-bottom w3-right'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
+    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-right w3-margin-bottom'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
   apiEl.append(cardEl);
   getNYT(searchInput, cardEl);
   getGecko(searchInput, cardEl);
@@ -79,13 +87,4 @@ function getGecko(searchInput, cardEl) {
 // Star/Favorite Click Function, with star buttons on each search result shown.
 // need to add in get Gecko a createElement(star-button)
 
-// var starContainer = document.querySelector("#fav-star");
-
-// starContainer.addEventListener("click", function(event) {
-//         event.target.classList.toggle("fave-no");
-//         event.target.classList.toggle("fave-yes");
-//         if (event.target.classList.contains("fave-yes")) {
-//                 getGecko(event.target.parent???);
-//                 localStorage.setItem("fave", JSON.stringify?(event.target???));
-//         }
-// })
+//                 //localStorage.setItem("fave", JSON.stringify?(event.target???));
