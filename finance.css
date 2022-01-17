@@ -1,0 +1,26 @@
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item {
+    width: 70px;
+    height: 70px;
+    height: auto;
+    margin: 3px;
+    padding: 3px;
+    text-align: center;
+}
+
+.list-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.middle {
+    border: 1px solid black;
+}
+
+header {
+    margin-bottom: 20px;
+}
