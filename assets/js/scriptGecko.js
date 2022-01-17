@@ -20,6 +20,9 @@ $("#search").click(function (event) {
 
 var localStorageBitcoin = localStorage.getItem("bitcoin");
 var localStorageEthereum = localStorage.getItem("ethereum");
+var localStorageDoge = localStorage.getItem("dogecoin");
+var localStorageLitecoin = localStorage.getItem("litecoin");
+var localStorageKava = localStorage.getItem("kava");
 var apiEl = document.querySelector("#api-container");
 var star = "";
 
@@ -29,7 +32,23 @@ if (localStorageBitcoin === "favorite") {
   makeCard();
 }
 if (localStorageEthereum === "favorite") {
+  star = "true";
   searchInput = "ethereum";
+  makeCard();
+}
+if (localStorageDoge === "favorite") {
+  star = "true";
+  searchInput = "dogecoin";
+  makeCard();
+}
+if (localStorageLitecoin === "favorite") {
+  star = "true";
+  searchInput = "litecoin";
+  makeCard();
+}
+if (localStorageKava === "favorite") {
+  star = "true";
+  searchInput = "kava";
   makeCard();
 }
 
@@ -45,34 +64,63 @@ function makeCard() {
     "w3-margin-bottom"
   );
   cardEl.innerHTML =
-    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-margin-bottom w3-right'></button><button style='font-size:24px'><i class='trash fa fa-trash-o'></i></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
-// console.log(cardEl);
-// console.log(searchInput);
-// console.log(apiEl);
+    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-margin-bottom w3-right'></button><button class='trash'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
   apiEl.append(cardEl);
   getNYT(searchInput, cardEl);
   getGecko(searchInput, cardEl);
 
   $(".star-btn").on("click", function () {
-    if ($(this).siblings().text() === "bitcoin") {
+    if ($(this).siblings().text() === "bitcoinX") {
       localStorage.setItem("bitcoin", "favorite");
     }
   });
   $(".star-btn").on("click", function () {
-    if ($(this).siblings().text() === "ethereum") {
+    if ($(this).siblings().text() === "ethereumX") {
       localStorage.setItem("ethereum", "favorite");
     }
   });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "dogecoinX") {
+      localStorage.setItem("dogecoin", "favorite");
+    }
+  });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "litecoinX") {
+      localStorage.setItem("litecoin", "favorite");
+    }
+  });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "kavaX") {
+      localStorage.setItem("kava", "favorite");
+    }
+  });
   $(".trash").on("click", function () {
-    if ($(this).parent().siblings().text() === "bitcoin☆" || "bitcoin★") {
+    if ($(this).siblings().text() === "bitcoin☆") {
       localStorage.removeItem("bitcoin");
     }
   });
   $(".trash").on("click", function () {
-    if ($(this).parent().siblings().text() === "ethereum☆" || "ethereum★") {
+    if ($(this).siblings().text() === "ethereum☆") {
       localStorage.removeItem("ethereum");
     }
   });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "dogecoin☆") {
+      localStorage.removeItem("dogecoin");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "litecoin☆") {
+      localStorage.removeItem("litecoin");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "kava☆") {
+      localStorage.removeItem("kava");
+    }
+  });
+
+
 }
 function getNYT(searchInput, cardEl) {
   var requestUrl =
@@ -86,10 +134,7 @@ function getNYT(searchInput, cardEl) {
     .then(function (data) {
       // Sets up header
       $(".star-btn").text("☆");
-      if (star === "true") {
-        $(".star-btn").text("★");
-      }
-      $(".trash").text("");
+      $(".trash").text("X");
       cardEl.querySelector("h3").textContent = searchInput;
 
       // Sets up NYT info
@@ -123,7 +168,3 @@ function getGecko(searchInput, cardEl) {
     });
 }
 
-// Star/Favorite Click Function, with star buttons on each search result shown.
-// need to add in get Gecko a createElement(star-button)
-
-//                 //localStorage.setItem("fave", JSON.stringify?(event.target???));
