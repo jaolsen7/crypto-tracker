@@ -18,7 +18,40 @@ $("#search").click(function (event) {
   });
 });
 
+var localStorageBitcoin = localStorage.getItem("bitcoin");
+var localStorageEthereum = localStorage.getItem("ethereum");
+var localStorageDoge = localStorage.getItem("dogecoin");
+var localStorageLitecoin = localStorage.getItem("litecoin");
+var localStorageKava = localStorage.getItem("kava");
 var apiEl = document.querySelector("#api-container");
+var star = "";
+
+if (localStorageBitcoin === "favorite") {
+  star = "true";
+  searchInput = "bitcoin";
+  makeCard();
+}
+if (localStorageEthereum === "favorite") {
+  star = "true";
+  searchInput = "ethereum";
+  makeCard();
+}
+if (localStorageDoge === "favorite") {
+  star = "true";
+  searchInput = "dogecoin";
+  makeCard();
+}
+if (localStorageLitecoin === "favorite") {
+  star = "true";
+  searchInput = "litecoin";
+  makeCard();
+}
+if (localStorageKava === "favorite") {
+  star = "true";
+  searchInput = "kava";
+  makeCard();
+}
+
 
 function makeCard() {
   var cardEl = document.createElement("div");
@@ -31,12 +64,64 @@ function makeCard() {
     "w3-margin-bottom"
   );
   cardEl.innerHTML =
-    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-right w3-margin-bottom'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
+    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-margin-bottom w3-right'></button><button class='trash'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
   apiEl.append(cardEl);
   getNYT(searchInput, cardEl);
   getGecko(searchInput, cardEl);
-}
 
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "bitcoinX") {
+      localStorage.setItem("bitcoin", "favorite");
+    }
+  });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "ethereumX") {
+      localStorage.setItem("ethereum", "favorite");
+    }
+  });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "dogecoinX") {
+      localStorage.setItem("dogecoin", "favorite");
+    }
+  });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "litecoinX") {
+      localStorage.setItem("litecoin", "favorite");
+    }
+  });
+  $(".star-btn").on("click", function () {
+    if ($(this).siblings().text() === "kavaX") {
+      localStorage.setItem("kava", "favorite");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "bitcoin☆") {
+      localStorage.removeItem("bitcoin");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "ethereum☆") {
+      localStorage.removeItem("ethereum");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "dogecoin☆") {
+      localStorage.removeItem("dogecoin");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "litecoin☆") {
+      localStorage.removeItem("litecoin");
+    }
+  });
+  $(".trash").on("click", function () {
+    if ($(this).siblings().text() === "kava☆") {
+      localStorage.removeItem("kava");
+    }
+  });
+
+
+}
 function getNYT(searchInput, cardEl) {
   var requestUrl =
     "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
@@ -47,18 +132,19 @@ function getNYT(searchInput, cardEl) {
       return response.json();
     })
     .then(function (data) {
-
       // Sets up header
-        $(".star-btn").text("☆");
-        cardEl.querySelector("h3").textContent = searchInput;
+      $(".star-btn").text("☆");
+      $(".trash").text("X");
+      cardEl.querySelector("h3").textContent = searchInput;
 
-        // Sets up NYT info
-        cardEl.querySelector("p").textContent = data.response.docs[0].headline.main;
-        var url = data.response.docs[0].web_url;
-        var urlText = "Link to Article";
-        var linkEl = cardEl.querySelector("a");
-        linkEl.append(urlText);
-        linkEl.setAttribute("href", url);
+      // Sets up NYT info
+      cardEl.querySelector("p").textContent =
+        data.response.docs[0].headline.main;
+      var url = data.response.docs[0].web_url;
+      var urlText = "Link to Article";
+      var linkEl = cardEl.querySelector("a");
+      linkEl.append(urlText);
+      linkEl.setAttribute("href", url);
     });
 }
 // Gecko Function that retrieves price and date last updated, creates a card with elements
@@ -68,23 +154,17 @@ function getGecko(searchInput, cardEl) {
     searchInput +
     "&vs_currencies=USD&include_last_updated_at=true";
 
-
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-        var price = data[searchInput].usd;
-        var unix = data[searchInput].last_updated_at;
-        var date = new Date(unix * 1000);
-        var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
-        cardEl.querySelector("h5").textContent = "Price: " + price + " USD";
-        $("h6").text(dateObject);
-
+      var price = data[searchInput].usd;
+      var unix = data[searchInput].last_updated_at;
+      var date = new Date(unix * 1000);
+      var dateObject = "Last Updated: " + date.toLocaleString().split(",")[0];
+      cardEl.querySelector("h5").textContent = "Price: " + price + " USD";
+      $("h6").text(dateObject);
     });
 }
 
-// Star/Favorite Click Function, with star buttons on each search result shown.
-// need to add in get Gecko a createElement(star-button)
-
-//                 //localStorage.setItem("fave", JSON.stringify?(event.target???));
