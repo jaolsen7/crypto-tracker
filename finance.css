@@ -23,4 +23,8 @@ img {
 
 header {
     margin-bottom: 20px;
+    background-image: linear-gradient(purple, rgb(94, 6, 175));
+    -webkit-text-stroke: 3px rgb(255, 255, 176);
+    -webkit-text-fill-color: black;
+    text-align: center;
 }

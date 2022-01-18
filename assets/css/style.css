@@ -6,11 +6,47 @@
 #search-container {
     display: flex;
     justify-content: center;
-    background-color: #02b8a5;
+    background-color: rgb(94, 6, 175);
 }
 #search {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    
 }
 .hide {
     display: none;
+} 
+.start {
+position: absolute;
+right: 0px;
+font-weight: 300;
+color: rgb(255, 255, 176);
+} 
+
+header {
+    background-image: linear-gradient(purple, rgb(94, 6, 175));
+      
+}
+h1 {
+    font-family: copperplate;
+    margin: 0;
+    text-align: center;
+    font-size: 75px;
+    -webkit-text-stroke: 2px rgb(255, 255, 176);
+    -webkit-text-fill-color: black;
+}
+
+.custom {
+    background-color: rgb(94, 6, 175);
+    color: rgb(255, 255, 176);
+    font-weight:bolder;
+}
+
+.custom2 {
+    background-image: linear-gradient(rgb(94, 6, 175), rgb(40, 170, 245));
+}
+
+body {
+    background-color: lightgrey;
 }

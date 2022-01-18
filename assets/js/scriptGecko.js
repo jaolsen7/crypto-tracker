@@ -61,10 +61,11 @@ function makeCard() {
     "l6",
     "w3-card-2",
     "w3-margin-top",
-    "w3-margin-bottom"
+    "w3-margin-bottom",
+    "custom"
   );
   cardEl.innerHTML =
-    "<header class='w3-container w3-blue'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-margin-bottom w3-right'></button><button class='trash'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-blue'><h5></h5><h6></h6></footer>";
+    "<header class='w3-container w3-purple'><h3></h3><button class='star-btn w3-button w3-circle w3-teal w3-margin-bottom w3-right'></button><button class='trash'></button></header> <div class='w3-container'><p></p><a></a></div> <footer class='w3-container w3-purple custom2'><h5></h5><h6></h6></footer>";
   apiEl.append(cardEl);
   getNYT(searchInput, cardEl);
   getGecko(searchInput, cardEl);
