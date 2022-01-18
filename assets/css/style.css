@@ -38,15 +38,15 @@ h1 {
 }
 
 .custom {
-    background-color: rgb(94, 6, 175);
+    background-image: linear-gradient(rgb(94, 6, 175), rgb(40, 170, 245));
     color: rgb(255, 255, 176);
     font-weight:bolder;
 }
 
 .custom2 {
-    background-image: linear-gradient(rgb(94, 6, 175), rgb(40, 170, 245));
+   
 }
 
 body {
-    background-color: lightgrey;
+    background-color: rgb(66, 65, 65);
 }
