@@ -97,26 +97,32 @@ function makeCard() {
   $(".trash").on("click", function () {
     if ($(this).siblings().text() === "bitcoin☆") {
       localStorage.removeItem("bitcoin");
+      console.log($(this));
+      $(this).parent().parent().addClass("hide");
     }
   });
   $(".trash").on("click", function () {
     if ($(this).siblings().text() === "ethereum☆") {
       localStorage.removeItem("ethereum");
+      $(this).parent().parent().addClass("hide");
     }
   });
   $(".trash").on("click", function () {
     if ($(this).siblings().text() === "dogecoin☆") {
       localStorage.removeItem("dogecoin");
+      $(this).parent().parent().addClass("hide");
     }
   });
   $(".trash").on("click", function () {
     if ($(this).siblings().text() === "litecoin☆") {
       localStorage.removeItem("litecoin");
+      $(this).parent().parent().addClass("hide");
     }
   });
   $(".trash").on("click", function () {
     if ($(this).siblings().text() === "kava☆") {
       localStorage.removeItem("kava");
+      $(this).parent().parent().addClass("hide");
     }
   });
 
